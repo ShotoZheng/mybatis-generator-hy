@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="mysql" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <plugin type="com.xml.generator.plugin.LombokPlugin"/>
+        <plugin type="com.xml.generator.plugin.PagePlugin"/>
+        <plugin type="com.xml.generator.plugin.SonarFormatPlugin"/>
+        <plugin type="com.xml.generator.plugin.LimitPlugin"/>
+        <commentGenerator type="com.xml.generator.plugin.CommentPlugin">
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="${db.url}"
+                        userId="${db.uid}"
+                        password="${db.password}">
+        </jdbcConnection>
+        <javaTypeResolver type="com.xml.generator.resolver.DefaultJavaTypeResolver">
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="${entity.target.package}" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${xml.target.package}"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${mapper.target.package}"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <table tableName="${table.name}" domainObjectName="${table.domain.name}" mapperName="${table.mapper.name}">
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+
+    </context>
+</generatorConfiguration>

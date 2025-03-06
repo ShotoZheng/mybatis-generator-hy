@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="development">
+        <environment id="development">
+            <!-- 配置事务管理器，采用的是JDBC的管理器方式 -->
+            <transactionManager type="JDBC"/>
+            <!--  POOLED代表采用MyBatis内部提供的连接池方式 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis-generator-plugin?nullCatalogMeansCurrent=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="abc123"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--  引入映射器 包名+文件名-->
+    <mappers>
+        <mapper resource="com/example/dao/UserMapper.xml"/>
+    </mappers>
+</configuration>
