@@ -97,10 +97,10 @@ public class UserExample {
 
     public UserExample page(Integer page, Integer pageSize) {
         if (page == null || page < 1) {
-            throw new RuntimeException("page for condition cannot be null or less than 1");
+            throw new IllegalArgumentException("page for condition cannot be null or less than 1");
         }
         if (pageSize == null || pageSize < 1) {
-            throw new RuntimeException("pageSize for condition cannot be null or less than 1");
+            throw new IllegalArgumentException("pageSize for condition cannot be null or less than 1");
         }
         this.offset = (page - 1) * pageSize;
         this.rows = pageSize;
@@ -129,21 +129,21 @@ public class UserExample {
 
         protected void addCriterion(String condition) {
             if (condition == null) {
-                throw new RuntimeException("Value for condition cannot be null");
+                throw new IllegalArgumentException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
         }
 
         protected void addCriterion(String condition, Object value, String property) {
             if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
+                throw new IllegalArgumentException("Value for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value));
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
             if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
+                throw new IllegalArgumentException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
         }

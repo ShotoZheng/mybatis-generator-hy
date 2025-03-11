@@ -53,10 +53,10 @@ public class LimitPlugin extends PluginAdapter {
         setPage = JavaElementGeneratorUtil.generateMethodBody(
                 setPage,
                 "if (page == null || page < 1) {",
-                "throw new RuntimeException(\"page for condition cannot be null or less than 1\");",
+                "throw new IllegalArgumentException(\"page for condition cannot be null or less than 1\");",
                 "}",
                 "if (pageSize == null || pageSize < 1) {",
-                "throw new RuntimeException(\"pageSize for condition cannot be null or less than 1\");",
+                "throw new IllegalArgumentException(\"pageSize for condition cannot be null or less than 1\");",
                 "}",
                 "this.offset = (page - 1) * pageSize;",
                 "this.rows = pageSize;",

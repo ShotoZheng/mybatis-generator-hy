@@ -30,11 +30,22 @@ public class SonarFormatPlugin extends PluginAdapter {
                 for (Method method : methods) {
                     replaceIsValidBodyLines(method);
                     replaceEqualToBodyLines(topLevelClass, method);
-
+                    replaceRuntimeException(method);
                 }
             }
         }
         return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
+    }
+
+    private void replaceRuntimeException(Method method) {
+        if (!"addCriterion".equals(method.getName())) {
+            return;
+        }
+        List<String> bodyLines = method.getBodyLines();
+        String exceptionBodyLine = bodyLines.get(1);
+        String exceptionMsg = "throw new IllegalArgumentException" + exceptionBodyLine.substring(exceptionBodyLine.indexOf("("));
+        bodyLines.remove(1);
+        bodyLines.add(1, exceptionMsg);
     }
 
     private void replaceEqualToBodyLines(TopLevelClass topLevelClass, Method method) {
