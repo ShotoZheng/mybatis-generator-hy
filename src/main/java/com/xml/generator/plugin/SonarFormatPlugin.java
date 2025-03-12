@@ -1,5 +1,6 @@
 package com.xml.generator.plugin;
 
+import com.utils.FormatUtil;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.*;
@@ -64,14 +65,14 @@ public class SonarFormatPlugin extends PluginAdapter {
         int e = firstBodyLine.lastIndexOf(")");
         String property = firstBodyLine.substring(s, e);
 
-        Field field = new Field(camelToSnake(property.substring(1, property.length() - 1)), FullyQualifiedJavaType.getStringInstance());
+        Field field = new Field(FormatUtil.camelToSnake(property.substring(1, property.length() - 1)), FullyQualifiedJavaType.getStringInstance());
         // 修改 body
         bodyLines.remove(0);
         bodyLines.add(0, replace(firstBodyLine, s, e, field.getName()));
 
         // 添加静态字段
-        boolean exsit = topLevelClass.getFields().stream().anyMatch(exsitField -> exsitField.getName().equals(field.getName()));
-        if (exsit) {
+        boolean exist = topLevelClass.getFields().stream().anyMatch(exsitField -> exsitField.getName().equals(field.getName()));
+        if (exist) {
             return;
         }
         field.setFinal(true);
@@ -96,21 +97,6 @@ public class SonarFormatPlugin extends PluginAdapter {
             }
         }
         return stringBuffer.toString();
-    }
-
-    public String camelToSnake(String camelCase) {
-        if (camelCase == null || camelCase.isEmpty()) {
-            return camelCase;
-        }
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < camelCase.length(); i++) {
-            char c = camelCase.charAt(i);
-            if (i > 0 && Character.isUpperCase(c)) {
-                result.append("_");
-            }
-            result.append(Character.toUpperCase(c));
-        }
-        return result.toString();
     }
 
     private void replaceCreateCriteriaInternal(Method method) {

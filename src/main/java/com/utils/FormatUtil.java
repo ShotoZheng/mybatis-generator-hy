@@ -41,4 +41,19 @@ public class FormatUtil {
             methods.add(index, method);
         }
     }
+
+    public static String camelToSnake(String camelCase) {
+        if (camelCase == null || camelCase.isEmpty()) {
+            return camelCase;
+        }
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < camelCase.length(); i++) {
+            char c = camelCase.charAt(i);
+            if (i > 0 && Character.isUpperCase(c)) {
+                result.append("_");
+            }
+            result.append(Character.toUpperCase(c));
+        }
+        return result.toString();
+    }
 }
