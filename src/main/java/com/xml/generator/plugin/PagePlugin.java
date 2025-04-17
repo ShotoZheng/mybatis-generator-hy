@@ -139,7 +139,7 @@ public class PagePlugin extends PluginAdapter {
         // if 节点
         XmlElement if3Ele = new XmlElement("if");
         if3Ele.addAttribute(new Attribute("test", "example.orderByClause != null"));
-        if3Ele.addElement(new TextElement("order by ${example.orderByClause}"));
+        if3Ele.addElement(new TextElement("${example.orderByClause}"));
         selectEle.addElement(if3Ele);
         return selectEle;
     }
