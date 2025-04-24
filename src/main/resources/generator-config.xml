@@ -8,8 +8,9 @@
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
         <plugin type="com.xml.generator.plugin.LombokPlugin"/>
 <!--        <plugin type="com.xml.generator.plugin.PagePlugin"/>-->
-        <plugin type="com.xml.generator.plugin.SonarFormatPlugin"/>
-        <plugin type="com.xml.generator.plugin.LimitPlugin"/>
+<!--        <plugin type="com.xml.generator.plugin.SonarFormatPlugin"/>-->
+<!--        <plugin type="com.xml.generator.plugin.LimitPlugin"/>-->
+        <plugin type="com.xml.generator.plugin.CustomizedPlugin"/>
         <commentGenerator type="com.xml.generator.plugin.CommentPlugin">
         </commentGenerator>
 

@@ -25,7 +25,7 @@ public class LimitTest extends MybatisBaseTest {
 
     private void testselectByExample(UserMapper userMapper) {
         UserExample example = new UserExample();
-        example.createCriteria().andAgeEqualTo(23);
+        example.createCriteria().andPropertyEqualTo(UserExample.AGE,23);
         List<User> users = userMapper.selectByExample(example);
         System.out.println(JSON.toJSONString(users));
         System.out.println("=========================================>>>");
@@ -34,7 +34,7 @@ public class LimitTest extends MybatisBaseTest {
     private void testselectByExampleByPage(UserMapper userMapper) {
         int pageSize = 2;
         UserExample example = new UserExample();
-        example.createCriteria().andAgeEqualTo(23);
+        example.createCriteria().andPropertyEqualTo(UserExample.AGE,23);
         long totalCount = userMapper.countByExample(example);
         // 分页数
         int pageCount = (int) Math.ceil(((double) totalCount / (double) pageSize));
